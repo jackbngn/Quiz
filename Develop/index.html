@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="/Assets/style.css" />
+    <title>JavaSCript Quiz</title>
+</head>
+<body>
+    <header>
+        <h3 id="view-high-scores"> View High Scores </h3>
+        <div id="timer"></div>
+    </header>
+
+    <main>  
+        <div id="start-card">
+            <div class="card-start">
+                <h1> Java Script Coding Quiz</h1>
+                <p>Try to answer the Javascript related quetions within the time limit.</p>
+                <p2>Answering incorrectly will substact time from the clock! </p2>
+                <button class="button" id="start-button"> Start </button>
+            </div>
+        </div>
+        
+        <div id="question-card"> 
+            <div class="card-question">
+                <button id="answer0" class="answer-button"></button> 
+                <button id="answer1" class="answer-button"></button> 
+                <button id="answer2" class="answer-button"></button> 
+                <button id="answer3" class="answer-button"></button> 
+            </div>
+        </div>
+
+        <div hidden id="score-card" class="card">
+            <h2>All done!</h2>
+            <form class="initals-form" id="initals">
+                <p>Enter Initals:
+                  <input type="text" name="initials" class="text-input"/>
+                  <button class="button-submit" type="button">Submit</button>
+                </p>
+            </form>
+        </div>
+
+        <div hidden id="highscores-card" class="card">
+            <h2>High Scores</h2>
+            <ol id="highscore-list"></ol>
+            <div>
+                <button id="back-button" class="button">Go Back</button>
+                <button id="clear-button" class="button">Clear High Scores</button>
+            </div>
+        </div>
+
+    </main>
+    
+    <script src="/Develop/script.js"></script>
+</body>
+</html>
