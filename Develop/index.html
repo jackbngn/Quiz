@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link rel="stylesheet" href="/Assets/style.css" />
-    <title>JavaSCript Quiz</title>
+    <title>JavaScript Quiz</title>
 </head>
 <body>
     <header>
@@ -19,20 +19,23 @@
                 <h1> Java Script Coding Quiz</h1>
                 <p>Try to answer the Javascript related quetions within the time limit.</p>
                 <p2>Answering incorrectly will substact time from the clock! </p2>
-                <button class="button" id="start-button"> Start </button>
+                <button id="start-button"class="button"> Start </button>
+                <button id="next-button" class="hide">next</button>
             </div>
         </div>
         
-        <div id="question-card"> 
-            <div class="card-question">
-                <button id="answer0" class="answer-button"></button> 
-                <button id="answer1" class="answer-button"></button> 
-                <button id="answer2" class="answer-button"></button> 
-                <button id="answer3" class="answer-button"></button> 
+        <div class="question-card"> 
+            <div id="card-question" class="hide">
+                <button id="answer0" class="answer-button button correct">answer 1</button> 
+                <button id="answer1" class="answer-button button incorrect">answer 1</button> 
+                <button id="answer2" class="answer-button">answer 1</button> 
+                <button id="answer3" class="answer-button">answer 1</button> 
             </div>
+            
+           
         </div>
 
-        <div hidden id="score-card" class="card">
+        <div class="hide" id="score-card">
             <h2>All done!</h2>
             <form class="initals-form" id="initals">
                 <p>Enter Initals:
@@ -42,7 +45,7 @@
             </form>
         </div>
 
-        <div hidden id="highscores-card" class="card">
+        <div class="hide" id="high-score-card">
             <h2>High Scores</h2>
             <ol id="highscore-list"></ol>
             <div>
