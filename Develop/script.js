@@ -21,7 +21,7 @@ console.log("start");
 function startQuiz() {
     hideCards();
     questionCard.classList.remove("hide");
-    
+    nextButton.classList.remove("hide");
     countdown();
     setQuestions()
 }
@@ -44,10 +44,8 @@ function countdown() {
 
 //question functions
 var questions = [ {
-      questions: "Inside which HTML element do we put the JavaScript?",
-      answers: [
-        {}
-      ]
+      questions: "1. Inside which HTML element do we put the JavaScript?",
+      answers: [ "a) <javascript>",  "b) <js>", "c) <script>" , "d) <scripting></scripting>" ]
 }
 ]
 
