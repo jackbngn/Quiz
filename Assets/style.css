@@ -124,13 +124,13 @@ main {
     
 }
 
-.button.correct {
-    color: white;
+.correct {
+    color: black;
     background-color: rgb(20, 243, 20);
 }
 
-.button.incorrect {
-    color: white;
+.incorrect {
+    color: black;
     background-color: red;
 }
 
