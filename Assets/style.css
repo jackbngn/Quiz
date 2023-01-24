@@ -5,7 +5,7 @@
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
     margin: 0px;
-    background-color: #3ae2dad3;
+    background-color: #3ae2dad3; 
 }
 
 header {
@@ -29,6 +29,7 @@ main {
     align-items: center;
     justify-content: center;
     text-align: center;
+    height: 100vh;
 }
 
 
@@ -75,7 +76,15 @@ main {
     color: grey;
 }
 
-
+#text-result {
+    font-size: 20px;
+    position: absolute;
+    width: 520px;;
+    padding: 20px;
+    bottom: 0;
+    left: 0;
+    
+}
 
 #card-question {
     width: 700px;
@@ -85,12 +94,12 @@ main {
     border-radius: 45px;
     box-shadow:0px 0px 10px 2px  lightgreen; 
     background-color: #f5f7f0f3;
-    margin-top: 150px;
+    margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
     padding: 35px;
     font-size: 30px;
-    
+    position: relative;
 }
 
 #questions {
@@ -124,31 +133,70 @@ main {
     
 }
 
-.correct {
-    color: black;
-    background-color: rgb(20, 243, 20);
+
+
+#score-card{
+    width: 65%;
+    border: solid;
+    border-color: lightgreen;
+    border-radius: 45px;
+    box-shadow:0px 0px 10px 2px  lightgreen; 
+    background-color: #f5f7f0f3;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10vh;
+    font-size: 30px;
+    justify-content: center;
+    align-items: center;
 }
 
-.incorrect {
-    color: black;
-    background-color: red;
+.button-submit {
+    background-color: lightgreen;
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 10px;
+    font-size: 20px;
 }
 
-#next-button {
-    margin: 20px;
-    border-radius: 4px;
-    border: 1px;
-    background-color: #3ae2dad3;
-    color: white;
+
+
+.text-input {
+    width: 35%;
+    padding: 1vh;
+    margin: 10px;
+
+}
+
+.button {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff; 
+    background-color: lightgreen;
+    border: none;
+    padding: 20px;
     font-size: 30px;
     font-weight: 500;
-    padding: 5px 10px;
     cursor: pointer;
-    width: 200px;
-
-    
+    margin-top: 30px;
+    border-radius: 20px; 
 }
 
+#high-score-card {
+    width: 65%;
+    border: solid;
+    border-color: lightgreen;
+    border-radius: 45px;
+    box-shadow:0px 0px 10px 2px  lightgreen; 
+    background-color: #f5f7f0f3;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10vh;
+    font-size: 30px;
+}
 .hide {
     display: none;
 }

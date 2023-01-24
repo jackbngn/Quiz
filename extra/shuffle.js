@@ -4,35 +4,25 @@ var questionCard = document.querySelector("#card-question")
 var nextButton = document.querySelector("#next-button")
 var startCard = document.querySelector(".card-start")
 var timer = document.querySelector("#timer")
-var highScoreCard = document.querySelector("#high-score-card")
-var scoreCard = document.querySelector("#score-card")
+var scoreCard = document.querySelector("#high-score-card")
+
+var answerChoices = document.querySelector("#answers-choices")
 
 
 // hide cards 
 function hideCards() {
 startCard.setAttribute("hidden", true);
-hideTextResult();
 }
-
-function hideTextResult() {
-    textResult.classList.add("hide")
-}
-
-function unHideResult() {
-    textResult.classList.remove("hide")
-}
-
 
 // start button on click
 startButton.addEventListener("click", startQuiz);
-
 // console.log("start");
 //start quiz function
 function startQuiz() {
     hideCards();
     shuffledQuestions();
     questionCard.classList.remove("hide");
-    // countdown();
+    countdown();
     showQuestions();
 }
 
@@ -102,12 +92,12 @@ function endQuiz (){
     var answer1 = document.querySelector("#answer1")
     var answer2 = document.querySelector("#answer2")
     var answer3 = document.querySelector("#answer3")
-    var answerSelect = document.querySelectorAll(".answer-button")
-    var textResult = document.querySelector("#text-result")
+    var answerButton = document.querySelectorAll(".answer-button")
+
+
 
 function showQuestions() {
-    var { question, answers } = questions[currentQuestionIndex];
-
+     var { question, answers, correct } = questions[currentQuestionIndex];
         // update question
         questionSlot.innerText = question;
           
@@ -118,63 +108,48 @@ function showQuestions() {
         answer2.innerText = answers[2];
         answer3.innerText = answers[3];
 
-            for (var i = 0; i < answerSelect.length; i++) {
-                answerSelect[i].setAttribute("onclick", "answerSelection(this)");
-            }
-}  
+// var answerSelect = document.querySelectorAll(".answer-button")
+      
+//     for (var i = 0; i < answerSelect.length; i++) {
+//         answerSelect[i].setAttribute("onclick", "answerSelection(this)");
+//         }
+    }  
 
 function answerSelection(answer) {
-    var { correct } = questions[currentQuestionIndex];
-
     var userAnswer = answer.textContent
     var correctAnswer = correct;
     console.log(correct);
-    if (userAnswer == correctAnswer) {
-        unHideResult();
-        textResult.textContent = "CORRECT!";
-        setTimeout(hideTextResult, 2000);
-        nextQuestions();
+    if (userAnswer == correctAnswer){
+        answer.classList.add("correct")
+        nextButton.classList.remove("hide")
         console.log("correct");
     } else {
-        unHideResult();
-        textResult.textContent ="INCORRECT!";
-        setTimeout(hideTextResult, 2000);
+        answer.classList.add("incorrect")
         timeLeft -=4;
         console.log("wrong");
     }
+    
 }
+
+nextButton.addEventListener("click", nextQuestions);
 
 function nextQuestions() {
     if (currentQuestionIndex < questions.length - 1 && timeLeft > 0) {
         currentQuestionIndex++;
+        clearAnswers()
         showQuestions(currentQuestionIndex);
         } else {
-            endQuiz();
             console.log("done");
         }
+    }
+var answerButtonCorrect = document.querySelector("answer-button correct")
+var answerButtonincorrect = document.querySelector("answer-button incorrect")
+
+function clearAnswers() {
+    answerButtonCorrect.classList.remove("correct")
+    answerButtonincorrect.classList.remove("incorrect")
 }
-
-
-        
-// function nextQuestions() {
-//         clearAnswers(answer);
-//         nextButton.classList.add("hide")
-//         if (currentQuestionIndex < questions.length - 1 && timeLeft > 0) {
-//             currentQuestionIndex++;
-//             showQuestions(currentQuestionIndex);
-//             } else {
-//                 console.log("done");
-//             }
-// }
-
-
-// var body = document.body
-// var resetButton= document.querySelectorAll("answer-button")
-
-
-
-
-
+    
 
     
  
