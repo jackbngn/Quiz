@@ -27,7 +27,8 @@
         <div class="question-card"> 
             <div id="card-question" class="hide">
                 <div id="result"></div>
-                    <p2 id="text-result">TEXT GOES HERE</p2>
+                    <p2 id="text-result-correct">TEXT GOES HERE</p2>
+                    <p2 id="text-result-incorrect">TEXT GOES HERE</p2>
                     <div id="questions"> Questions</div>
                         <div id="answers-choices">
                             <button id="answer0" class="answer-button ">answer 1</button> 
@@ -41,10 +42,14 @@
 
         <div class="hide" id="score-card">
             <h2>Good Job!</h2>
+            <div id="user-scores">You got </div>
             <form class="initals-form" id="initals">
-                <p>Enter Initals:
+              <p id="initals">Enter Nickname:
                   <input type="text" name="initials" class="text-input"/>
-                  <button class="button-submit" type="button">Submit</button>
+                  <div class="score-button">
+                    <button class="button" id="back-button" >Go Back</button>
+                    <button class="button" id="button-submit"type="button">Submit</button>
+                </div>
                 </p>
             </form>
         </div>

@@ -41,7 +41,7 @@ main {
     border-radius: 45px;
     box-shadow:0px 0px 10px 2px  lightgreen; 
     background-color: #f5f7f0f3;
-    margin-top: 100px;
+    margin-top: -100px;
     margin-left: auto;
     margin-right: auto;
     padding: 25px;
@@ -76,13 +76,23 @@ main {
     color: grey;
 }
 
-#text-result {
+#text-result-correct {
     font-size: 20px;
     position: absolute;
     width: 520px;;
     padding: 20px;
     bottom: 0;
     left: 0;
+    color: green;
+}
+#text-result-incorrect {
+    font-size: 20px;
+    position: absolute;
+    width: 520px;;
+    padding: 20px;
+    bottom: 0;
+    left: 0;
+    color: red;
     
 }
 
@@ -94,7 +104,7 @@ main {
     border-radius: 45px;
     box-shadow:0px 0px 10px 2px  lightgreen; 
     background-color: #f5f7f0f3;
-    margin-top: 10px;
+    margin-top: -100px;
     margin-left: auto;
     margin-right: auto;
     padding: 35px;
@@ -106,6 +116,20 @@ main {
     padding: 30px;
     font-size: 40px;
     font-weight: 600;
+}
+.button {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff; 
+    background-color: lightgreen;
+    border: none;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 30px;
+    border-radius: 20px; 
 }
 
 .answer-button {
@@ -133,8 +157,6 @@ main {
     
 }
 
-
-
 #score-card{
     width: 65%;
     border: solid;
@@ -142,46 +164,47 @@ main {
     border-radius: 45px;
     box-shadow:0px 0px 10px 2px  lightgreen; 
     background-color: #f5f7f0f3;
-    margin-top: 100px;
+    margin-top: -100px;
     margin-left: auto;
     margin-right: auto;
-    padding: 10vh;
+    padding: 6vh;
     font-size: 30px;
+}
+
+#initals{
+    margin: -5px;
+    padding-top: 15px;
+}
+
+.score-button {
+    display: inline;
     justify-content: center;
     align-items: center;
-}
-
-.button-submit {
-    background-color: lightgreen;
-    border: none;
-    border-radius: 12px;
-    padding: 15px;
     margin-top: 10px;
+    margin: 15px;
+    
+}
+#button-submit {
+    border-radius: 12px;
     font-size: 20px;
+    width: 30%;
+    margin: 15px;
 }
 
+#back-button {
+    border-radius: 12px;
+    font-size: 20px;
+    width: 30%;
+    margin: 0;
 
+}
 
 .text-input {
     width: 35%;
-    padding: 1vh;
+    padding: 1.3vh;
     margin: 10px;
-
-}
-
-.button {
-    display: inline-block;
-    justify-content: center;
-    align-items: center;
-    color: #ffffff; 
-    background-color: lightgreen;
-    border: none;
-    padding: 20px;
-    font-size: 30px;
-    font-weight: 500;
-    cursor: pointer;
-    margin-top: 30px;
-    border-radius: 20px; 
+    font: 20px;
+    margin-top: 0;
 }
 
 #high-score-card {
