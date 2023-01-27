@@ -1,27 +1,55 @@
-// get element by id
+// get element by doucument.querySelector
 var startButton = document.querySelector("#start-button");
 var questionCard = document.querySelector("#card-question");
-var startCard = document.querySelector(".card-start");
+var startCard = document.querySelector("#start-card");
 var timer = document.querySelector("#timer");
 var highScoreCard = document.querySelector("#high-score-card");
 var scoreCard = document.querySelector("#score-card");
 var textResultCorr = document.querySelector("#text-result-correct");
 var textResultInc = document.querySelector("#text-result-incorrect");
 var userPoints = document.querySelector("#user-scores");
+var viewHigh = document.querySelector("#view-high-scores");
 
 var userScore = 0;
+var timerInterval;
+var timeLeft;
+
+// start button on click
+startButton.addEventListener("click", startQuiz);
+
+// View all high scores on click
+viewHigh.addEventListener("click", hsMenu);
+
+//start quiz function
+function startQuiz() {
+	hideCards();
+	timeLeft = 30;
+	timerInterval = setInterval(countdown, 1000);
+	timeRemaining();
+	currentQuestionIndex = 0;
+	userScore = 0;
+	shuffledQuestions();
+	questionCard.classList.remove("hide");
+	showQuestions();
+}
 
 // hide cards
 function hideCards() {
-	startCard.setAttribute("hidden", true);
+	startCard.classList.add("hide");
 	hideTextResult();
 }
-
+// open high score menu
+function hsMenu() {
+	hideCards();
+	highScoreCard.classList.remove("hide");
+}
+// hide correct/incorrect text
 function hideTextResult() {
 	textResultCorr.classList.add("hide");
 	textResultInc.classList.add("hide");
 }
 
+//un hide correct/incorrect text
 function unHideCorrect() {
 	textResultCorr.classList.remove("hide");
 }
@@ -29,22 +57,6 @@ function unHideCorrect() {
 function unHideWrong() {
 	textResultInc.classList.remove("hide");
 }
-
-// start button on click
-startButton.addEventListener("click", startQuiz);
-
-// console.log("start");
-//start quiz function
-function startQuiz() {
-	hideCards();
-	timerInterval = setInterval(countdown, 1000);
-	timeRemaining();
-	shuffledQuestions();
-	questionCard.classList.remove("hide");
-	showQuestions();
-}
-var timerInterval;
-var timeLeft = 10;
 
 //display timer
 function timeRemaining() {
@@ -55,21 +67,9 @@ function timeRemaining() {
 function countdown() {
 	timeLeft--;
 	timeRemaining();
-	if (timeLeft < 0) {
+	if (timeLeft < 1) {
 		endQuiz();
 	}
-}
-
-function endQuiz() {
-	scoreCard.classList.remove("hide");
-	questionCard.setAttribute("hidden", true);
-	clearInterval(timerInterval);
-	timer.classList.add("hide");
-	displayUserScore();
-}
-
-function displayUserScore() {
-	userPoints.textContent = "You got " + userScore + " points!";
 }
 
 // function to shuffle the question randomly
@@ -82,7 +82,16 @@ function shuffledQuestions() {
 		questions[randomIndex] = currentQuestionIndex;
 	}
 }
-// function showQuestions
+// end quiz
+function endQuiz() {
+	scoreCard.classList.remove("hide");
+	questionCard.classList.add("hide");
+	clearInterval(timerInterval);
+	timer.classList.add("hide");
+	displayUserScore();
+}
+
+//question array
 var currentQuestionIndex = 0;
 //question array
 var questions = [
@@ -142,164 +151,155 @@ var answer2 = document.querySelector("#answer2");
 var answer3 = document.querySelector("#answer3");
 var answerSelect = document.querySelectorAll(".answer-button");
 
+// display Questions
 function showQuestions() {
 	var { question, answers } = questions[currentQuestionIndex];
 
 	// update question
-	questionSlot.innerText = question;
+	questionSlot.textContent = question;
 
 	// update answer selections
-	// get all answer buttons
-	answer0.innerText = answers[0];
-	answer1.innerText = answers[1];
-	answer2.innerText = answers[2];
-	answer3.innerText = answers[3];
+	answer0.textContent = answers[0];
+	answer1.textContent = answers[1];
+	answer2.textContent = answers[2];
+	answer3.textContent = answers[3];
 
+	// onclick display if answer is correct
 	for (var i = 0; i < answerSelect.length; i++) {
 		answerSelect[i].setAttribute("onclick", "answerSelection(this)");
 	}
 }
 
+//check if answer is correct/wrong
 function answerSelection(answer) {
 	var { correct } = questions[currentQuestionIndex];
-
 	var userAnswer = answer.textContent;
 	var correctAnswer = correct;
-	console.log(correct);
+	// console.log(correct);
+
+	// if answer is correct then display correct and add 2 to the user's score
 	if (userAnswer == correctAnswer) {
 		userScore = userScore + 2;
-		console.log(userScore);
+		// console.log(userScore);
 		unHideCorrect();
 		textResultCorr.textContent = "CORRECT!";
 		setTimeout(hideTextResult, 2000);
 		nextQuestions();
-		console.log("correct");
+		// console.log("correct");
+
+		// else if answer is wrong then display incorrect and -time
 	} else {
 		unHideWrong();
 		textResultInc.textContent = "INCORRECT!";
 		setTimeout(hideTextResult, 2000);
 		timeLeft -= 4;
-		console.log("wrong");
+		// console.log("wrong");
 	}
 }
 
+// show next questions
+// check to see if there's anymore questions & time then show the next question else end quiz
 function nextQuestions() {
 	if (currentQuestionIndex < questions.length - 1 && timeLeft > 0) {
 		currentQuestionIndex++;
 		showQuestions(currentQuestionIndex);
 	} else {
 		endQuiz();
-		console.log("done");
+		// console.log("done");
 	}
 }
 
+// display how many points the user got
+function displayUserScore() {
+	userPoints.textContent = "You got " + userScore + " points!";
+}
+
+var clearButton = document.querySelector("#clear-button");
+var backButton = document.querySelector("#back-button");
 var submitButton = document.querySelector("#button-submit");
 var initials = document.querySelector(".text-input");
+var scoreBoard = document.querySelector("#high-score-list");
+var userNickname = [];
 
+// submit listener
 submitButton.addEventListener("click", saveScore);
 
+// save user's input
 function saveScore(event) {
 	event.preventDefault();
-	if (!initials.value) {
-		alert("Please enter a nickname!");
-		return;
-	}
 
-	var highScores = {
-		score: userScore,
+	var userNickname = {
 		initials: initials.value,
+		score: userScore,
 	};
 
-	// updateHsLb(highScores);
-	hideCards();
-	scoreCard.classList.add("hide");
+	// var userNickname = initials.value.trim();
+
+	// console.log(userNickname);
+
+	updateHighScore(userNickname);
 	highScoreCard.classList.remove("hide");
-
-	addHighScore(highScores);
+	scoreCard.classList.add("hide");
+	showHighScore();
 }
 
-function addHighScore(highScores) {
-	var userHighScore = getHighScore();
-	userHighScore.push(highScores);
-	localStorage.setItem("userHighScore", JSON.stringify(userHighScore));
+//localStorage the user's input
+function updateHighScore(userNickname) {
+	var userSubmit = grabHighScore();
+	userSubmit.push(userNickname);
+	localStorage.setItem("userSubmit", JSON.stringify(userSubmit));
 }
 
-function getHighScore() {
-	var saveHighScore = localStorage.getItem("userHighScore");
-	if (saveHighScore !== null) {
-		var userHighScore = JSON.parse(saveHighScore);
-		return userHighScore;
+//LocalStorage get item user's input
+function grabHighScore() {
+	var storeName = localStorage.getItem("userSubmit");
+	if (storeName !== null) {
+		var userSubmit = JSON.parse(storeName);
+		return userSubmit;
 	} else {
-		userHighScore = [];
+		userSubmit = [];
 	}
-	return saveHighScore;
+	return userSubmit;
 }
 
-function nextQuestions() {
-	clearAnswers(answer);
-	nextButton.classList.add("hide");
-	if (currentQuestionIndex < questions.length - 1 && timeLeft > 0) {
-		currentQuestionIndex++;
-		showQuestions(currentQuestionIndex);
-	} else {
-		console.log("done");
+// show user's high score
+function showHighScore() {
+	var sortHighScore = sortHigh();
+	scoreBoard.textContent = "";
+	for (var i = 0; i < sortHighScore.length; i++) {
+		var HighScoreSubmit = sortHighScore[i];
+		var li = document.createElement("li");
+		li.textContent = HighScoreSubmit.initials + " : " + HighScoreSubmit.score;
+		scoreBoard.appendChild(li);
 	}
 }
 
-// var body = document.body
-// var resetButton= document.querySelectorAll("answer-button")
+//sort the high score card
+function sortHigh() {
+	var userSubmit = grabHighScore();
+	if (!userSubmit) {
+		return;
+	}
+	userSubmit.sort(function (a, b) {
+		return b.score - a.score;
+	});
+	return userSubmit;
+}
+//add event listener for clearing the highscore
+clearButton.addEventListener("click", clearHighScores);
 
-//  after the game
-//     get initials
-//     render high scores
+// add event listener for back
+backButton.addEventListener("click", menu);
 
-// function shuffledAnswers() {
-//     for (var i = 0; i < 4; i++) {
-//         var CurrentAnswerIndex = questions.answers[i];
-//         var randomAnswerIndex = Math.floor(Math.random() * 4 - 1);
-//         var randomAnswer = questions[randomAnswerIndex];
-//         answers[i] = randomAnswer;
-//         answers[randomAnswerIndex] = CurrentAnswerIndex
-//     }
+//go back to the start card
+function menu() {
+	startCard.classList.remove("hide");
+	highScoreCard.classList.add("hide");
+	timer.classList.remove("hide");
+}
 
-// }
-// console.log(questions['answers'])
-
-// questions
-// 1.Inside which HTML element do we put the JavaScript?
-// a) <javascript>
-// b) <js>
-// c) <script>
-// d) <scripting></scripting>
-
-// 6. How do you write "Hello World" in an alert box?
-// a) alert("Hello World")
-// b) msgBox("Hello World")
-// c) alertBox="Hello World"
-// d) alertBox("Hello World")
-
-// 7. How do you create a function?
-// a) function:myFunction()
-// b) function=myFunction()
-// c) function myFunction()
-// d) myFunction():function
-
-// 9. How do you write a conditional statement for executing some statements only if "i" is equal to 5?
-// a) if i==5 then
-// b) if (i==5)
-// c) if i=5 then
-// d) if i=5
-
-// 13. How can you add a comment in a JavaScript?
-// a) //This is a comment
-// b) 'This is a comment
-// c) <!--This is a comment-->
-// d) #This is a comment
-
-// 39. A named element in a JavaScript program that is used to store and retrieve data is a _____.
-// a) Method
-// b) assignment operator
-// c) Variable
-// d) string
-
-//
+// clear localstorage high score card
+function clearHighScores() {
+	localStorage.clear();
+	showHighScore();
+}
