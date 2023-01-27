@@ -41,6 +41,9 @@ function hideCards() {
 // open high score menu
 function hsMenu() {
 	hideCards();
+	clearInterval(timerInterval);
+	questionCard.classList.add("hide");
+	scoreCard.classList.add("hide");
 	highScoreCard.classList.remove("hide");
 }
 // hide correct/incorrect text
@@ -293,6 +296,7 @@ backButton.addEventListener("click", menu);
 
 //go back to the start card
 function menu() {
+	scoreCard.classList.add("hide");
 	startCard.classList.remove("hide");
 	highScoreCard.classList.add("hide");
 	timer.classList.remove("hide");
