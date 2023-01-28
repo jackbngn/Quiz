@@ -45,6 +45,7 @@ function hsMenu() {
 	questionCard.classList.add("hide");
 	scoreCard.classList.add("hide");
 	highScoreCard.classList.remove("hide");
+	showHighScore();
 }
 // hide correct/incorrect text
 function hideTextResult() {
